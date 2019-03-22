@@ -13,14 +13,19 @@ public class ProductClient {
 
 	private final static String BASE_URL = "https://www.faire-stage.com/";
 	
+	private String apiKey;
+	
 	private final RestTemplate rest;
 	
 	public ProductClient(final RestTemplate restTemplate) {
 		this.rest = restTemplate;
 	}
 	
+	public void setApiKey(final String apiKey) {
+		this.apiKey = apiKey;
+	}
 	
-	public ProductsWrapper getAllProducts(final String apiKey) {
+	public ProductsWrapper getAllProducts() {
 		 final HttpHeaders headers = new HttpHeaders();
 		 headers.set("Content-Type","application/json");
 		 headers.set("X-FAIRE-ACCESS-TOKEN",apiKey);

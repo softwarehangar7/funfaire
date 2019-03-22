@@ -22,7 +22,12 @@ public class FunfaireApplication implements CommandLineRunner{
 
 	@Override
 	public void run(final String... args) throws Exception {
-		System.out.println(client.getAllProducts("HQLA9307HSLQYTC24PO2G0LITTIOHS2MJC8120PVZ83HJK4KACRZJL91QB7K01NWS2TUCFXGCHQ8HVED8WNZG0KS6XRNBFRNGY71").getCollection());
+		if (args.length !=1) throw new RuntimeException("Should include API KEY as arg");
+		final String apiKey = args[0];
+		client.setApiKey(apiKey);
+		
+		
+		System.out.println(client.getAllProducts().getCollection());
 		
 	}
 
