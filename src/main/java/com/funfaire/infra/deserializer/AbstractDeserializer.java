@@ -3,6 +3,8 @@ package com.funfaire.infra.deserializer;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import com.fasterxml.jackson.core.JsonParser;
@@ -38,6 +40,11 @@ public abstract class AbstractDeserializer<T> extends JsonDeserializer<T> {
         return this.hasNonNullAndNonEmpty(node, fieldName) ? new Date(node.get(fieldName.toString()).asLong()) : null;
     }
 
+    protected LocalDateTime getFieldLocalDateTime(final JsonNode node, final Enum<?> fieldName, final DateTimeFormatter formatter) {
+    	return this.hasNonNullAndNonEmpty(node, fieldName) ? LocalDateTime.parse(node.get(fieldName.toString()).textValue(), formatter) : null;
+    }
+    
+    
     protected Long getFieldLongValue(final JsonNode node, final Enum<?> fieldName) {
         return this.hasNonNullAndNonEmpty(node, fieldName) ? node.get(fieldName.toString()).asLong() : null;
     }

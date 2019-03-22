@@ -5,16 +5,18 @@ import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.funfaire.infra.deserializer.ProductDeserializer;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@JsonDeserialize(using= ProductDeserializer.class)
 public class ProductOption {
 
 	@Id
@@ -23,12 +25,9 @@ public class ProductOption {
 	private Boolean active;
 	private String name;
 	private String sku;
-	private Integer available_quantity;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd'T'HHmmss.SSSX")
+	private Long available_quantity;
 	private LocalDateTime backordered_until;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd'T'HHmmss.SSSX")
 	private LocalDateTime created_at;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd'T'HHmmss.SSSX")
 	private LocalDateTime updated_at;
 	
 }

@@ -1,6 +1,7 @@
 package com.funfaire.domain.product;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,16 +10,20 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.funfaire.infra.deserializer.ProductDeserializer;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@JsonDeserialize(using= ProductDeserializer.class)
 public class Product {
 
 	@Id
@@ -31,10 +36,17 @@ public class Product {
 	@Column private Boolean active;
 	@Column private String name;
 	@Column private Long unit_multiplier;
-	@OneToMany private final List<ProductOption> options = new LinkedList<ProductOption>();
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd'T'HHmmss.SSSX")
+	@OneToMany @Setter(AccessLevel.NONE)
+	private final List<ProductOption> options = new LinkedList<ProductOption>();
 	@Column private LocalDateTime created_at;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd'T'HHmmss.SSSX")
 	@Column private LocalDateTime updated_at;
+	
+	public void addProductOptions(final ProductOption productOption) {
+		options.add(productOption);
+	}
+	
+	public List<ProductOption> getOptions(){
+		return Collections.unmodifiableList(options);
+	}
 	
 }
