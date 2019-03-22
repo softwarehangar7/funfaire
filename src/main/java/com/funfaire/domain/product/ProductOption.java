@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.funfaire.infra.deserializer.ProductDeserializer;
+import com.funfaire.infra.deserializer.ProductOptionDeserializer;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@JsonDeserialize(using= ProductDeserializer.class)
+@JsonDeserialize(using= ProductOptionDeserializer.class)
 public class ProductOption {
 
 	@Id

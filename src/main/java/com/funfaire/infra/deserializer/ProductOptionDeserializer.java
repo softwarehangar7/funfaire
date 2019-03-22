@@ -3,14 +3,11 @@ package com.funfaire.infra.deserializer;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import org.springframework.stereotype.Component;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.funfaire.domain.product.ProductOption;
 
 import lombok.AllArgsConstructor;
 
-@Component
 public class ProductOptionDeserializer extends AbstractDeserializer<ProductOption>{
 
 	private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmmss.SSSX");

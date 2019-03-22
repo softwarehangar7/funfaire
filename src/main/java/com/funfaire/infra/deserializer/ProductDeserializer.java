@@ -1,17 +1,18 @@
 package com.funfaire.infra.deserializer;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
-import org.springframework.stereotype.Component;
-
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.funfaire.domain.product.Product;
+import com.funfaire.domain.product.ProductOption;
 
 import lombok.AllArgsConstructor;
 
-@Component
 public class ProductDeserializer extends AbstractDeserializer<Product>{
 	
 	private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmmss.SSSX");
@@ -33,14 +34,19 @@ public class ProductDeserializer extends AbstractDeserializer<Product>{
 		
 		final Product product = new Product(id, brand_id, short_desc, description, wholesale_price, retailPrice, active, name, unitMultiplier, createdAt, updatedAt);
 
-		/*
-		 * final JsonNode productOptionsNode = getArrayNodeValue(jsonNode,
-		 * Field.OPTIONS); List<ProductOption> options = null; try { options =
-		 * mapper.readValue(productOptionsNode.toString(), new
-		 * TypeReference<List<ProductOption>>() {}); options.forEach(option ->
-		 * product.addProductOptions(option)); } catch (final IOException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); }
-		 */
+		
+		final JsonNode productOptionsNode = getArrayNodeValue(jsonNode,Field.OPTIONS); 
+		List<ProductOption> options = null; 
+		try { 
+			options =
+					mapper.readValue(productOptionsNode.toString(), new TypeReference<List<ProductOption>>() {}); 
+			options.forEach(option ->
+			product.addProductOptions(option)); 
+		} catch (final IOException e) { 
+			// TODO Auto-generated catch block 
+			e.printStackTrace(); 
+		}
+		 
 		
 		return product;
 	}
