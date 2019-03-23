@@ -24,5 +24,18 @@ public class OrderItem {
 	private Boolean includesTester; 
 	private Long price_cents;
 	
+	public OrderItem(final String id, final LocalDateTime createdAt, final LocalDateTime updatedAt, final Long quantity, final String sku,
+			final Boolean includesTester, final Long price_cents) {
+		this.id = id;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.quantity = quantity;
+		this.sku = sku;
+		this.includesTester = includesTester;
+		this.price_cents = price_cents;
+	}
 	
+	public OrderItem() {
+		this(null, null, null, null, null, null, null);
+	}
 }
