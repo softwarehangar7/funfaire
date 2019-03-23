@@ -36,7 +36,7 @@ public class Product {
 	@Column private Boolean active;
 	@Column private String name;
 	@Column private Long unit_multiplier;
-	@OneToMany @Setter(AccessLevel.NONE)
+	@OneToMany( mappedBy = "product" ) @Setter(AccessLevel.NONE)
 	private final List<ProductOption> options = new LinkedList<ProductOption>();
 	@Column private LocalDateTime created_at;
 	@Column private LocalDateTime updated_at;

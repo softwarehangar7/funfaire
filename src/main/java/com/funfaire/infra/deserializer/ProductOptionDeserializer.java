@@ -15,7 +15,6 @@ public class ProductOptionDeserializer extends AbstractDeserializer<ProductOptio
 	@Override
 	public ProductOption deserialize(final JsonNode jsonNode) {
 		final String id = getFieldTextValue(jsonNode, Field.ID);
-		final String product_id = getFieldTextValue(jsonNode, Field.PRODUCT_ID);
 		final Boolean active = getFieldBooleanValue(jsonNode, Field.ACTIVE);
 		final String name = getFieldTextValue(jsonNode, Field.NAME);
 		final String sku = getFieldTextValue(jsonNode, Field.SKU);
@@ -24,7 +23,7 @@ public class ProductOptionDeserializer extends AbstractDeserializer<ProductOptio
 		final LocalDateTime created_at = getFieldLocalDateTime(jsonNode, Field.CREATED_AT, DATE_FORMATTER);
 		final LocalDateTime updated_at = getFieldLocalDateTime(jsonNode, Field.UPDATED_AT, DATE_FORMATTER);
 		
-		return new ProductOption(id, product_id, active, name, sku, available_quantity, backordered_until, created_at, updated_at);
+		return new ProductOption(id, active, name, sku, available_quantity, backordered_until, created_at, updated_at);
 	}
 
     @AllArgsConstructor

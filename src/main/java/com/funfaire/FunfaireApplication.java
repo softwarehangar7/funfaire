@@ -27,7 +27,7 @@ public class FunfaireApplication implements CommandLineRunner{
 		client.setApiKey(apiKey);
 		
 		
-		System.out.println(client.getAllProducts().getCollection());
+		System.out.println(client.getAllProductsByBrand("b_d2481b88").getCollection());
 		
 	}
 
