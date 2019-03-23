@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final ProductOptionRepository productOptionRepository;
 
     public List<Product> getProducts() {
         return productRepository.findAll();
@@ -27,11 +28,17 @@ public class ProductService {
 
     public Product save(final Product product) {
         final Product newProduct = productRepository.save(product);
+        productOptionRepository.saveAll(product.getOptions());
         return newProduct;
     }
 
     public List<Product> saveAll(final Iterable<Product> products) {
-    	return productRepository.saveAll(products);
+    	final List<Product> newProducts = productRepository.saveAll(products);
+    	for (final Product product : newProducts) {
+			productOptionRepository.saveAll(product.getOptions());
+		}
+    	
+    	return newProducts;
     }
     
     

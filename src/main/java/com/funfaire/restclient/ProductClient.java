@@ -35,7 +35,7 @@ public class ProductClient {
 				HttpMethod.GET, entity, ProductsWrapper.class,brand_id)
 				.getBody();
 
-		//productService.saveAll(wrapper.getCollection());
+		productService.saveAll(wrapper.getCollection());
 
 		return wrapper;
 	}
